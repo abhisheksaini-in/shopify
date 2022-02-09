@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Men's Fashion{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+
+    <div class="list-group">
+        <a class="list-group-item list-group-item-action " href="{% url 'menfashion' %}">All Men's Fashion</a>
+        <a class="list-group-item list-group-item-action" href="{% url 'menfashiondata' 'MontCarlo' %}">Mont Carlo</a>
+        <a class="list-group-item list-group-item-action" href="{% url 'menfashiondata' 'PeterEngland' %}">Peter England</a>
+        <a class="list-group-item list-group-item-action" href="{% url 'menfashiondata' 'ARCreation' %}">AR Creation</a>
+        <a class="list-group-item list-group-item-action" href="{% url 'menfashiondata' 'LeeCooper' %}">Lee Cooper</a>
+        <a class="list-group-item list-group-item-action" href="{% url 'menfashiondata' 'below' %}">Below 1,000</a>
+        <a class="list-group-item list-group-item-action" href="{% url 'menfashiondata' 'above' %}">above 1,000</a>
+        
+      </div>
+   
+  </div>
+  <div class="col-sm-8 offset-sm-1">
+    <div class="row ">
+    {% for mf in menfashion %}
+        <div class="col-sm-4 my-2">
+            <div class=" item">
+                <div class="thumbnail product-box">
+                 <a href="{% url 'product-detail' mf.url %}">
+                    <img src="/media/{{mf.image}}" alt="" />
+                   </a>
+                    <div class="caption">
+                        <h6 class="mt-2 ml-5"><a  style="text-decoration: none; color:brown;" href="#">{{mf.brand}}</a></h6>
+                        <h5 class="my-2 text-center" ><a class="text-dark" style="text-decoration: none;" href="{% url 'product-detail' mf.url %}">{{mf.title}}</a></h5>
+                        <p class="text-center"> <strong>Rs.{{mf.discount_price}}</strong> &nbsp; <small><s>{{mf.selling_price}}</s></small> &nbsp; <span class="text-success"> {{mf.discount_percent}}% off</span></p>
+                        <form action="/add-to-cart" class="d-inline">
+                          <input type="hidden" name="product_id" id="product_id" value="{{mf.id}}">
+                      
+                        <button type="submit" class="btn btn-success  mx-1">Add to Cart</button>
+                        </form>
+                          
+                          <a href="#" class="btn btn-primary mx-1" role="button">Buy Now</a>
+                    </div>
+                </div>
+              </div>
+        </div>
+    {% endfor %}
+    </div>
+
+   
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

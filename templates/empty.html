@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Your Cart is Empty{% endblock title %}
+
+{% block main-content %}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="alert alert-info" role="alert">
+                <strong>You don't have any product on your Cart. </strong> 
+              </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+
+{% endblock main-content %}

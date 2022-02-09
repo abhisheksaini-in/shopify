@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Latest Mobile{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+
+    <div class="list-group">
+        <a class="list-group-item list-group-item-action" href="{% url 'mobile' %}">All Mobile</a>
+        <a class="list-group-item list-group-item-action" href="{% url 'mobiledata' 'realme' %}">realme</a>
+        <a class="list-group-item list-group-item-action" href="{% url 'mobiledata' 'POCO' %}">POCO</a>
+        <a class="list-group-item list-group-item-action" href="{% url 'mobiledata' 'Samsung' %}">Samsung</a>
+        <a class="list-group-item list-group-item-action" href="{% url 'mobiledata' 'below' %}">Below 10,000</a>
+        <a class="list-group-item list-group-item-action" href="{% url 'mobiledata' 'above' %}">above 10,000</a>
+        
+      </div>
+   
+  </div>
+  <div class="col-sm-8 offset-sm-1">
+    <div class="row ">
+    {% for m in mobile %}
+        <div class="col-sm-4 my-2">
+            <div class=" item">
+                <div class="thumbnail product-box">
+                 <a href="{% url 'product-detail' m.url %}">
+                    <img src="/media/{{m.image}}" alt="" />
+                   </a>
+                    <div class="caption">
+                        <h6 class="mt-2 ml-5"><a  style="text-decoration: none; color:brown;" href="#">{{m.brand}}</a></h6>
+                        <h5 class="my-2 text-center" ><a class="text-dark" style="text-decoration: none;" href="{% url 'product-detail' m.url %}">{{m.title}}</a></h5>
+                        <p class="text-center"> <strong>Rs.{{m.discount_price}}</strong> &nbsp; <small><s>{{m.selling_price}}</s></small> &nbsp; <span class="text-success"> {{m.discount_percent}} off</span></p>
+                        <form action="/add-to-cart" class="d-inline">
+                          <input type="hidden" name="product_id" id="product_id" value="{{m.id}}">
+                      
+                        <button type="submit" class="btn btn-success  mx-1">Add to Cart</button>
+                        </form>
+                          
+                          <a href="#" class="btn btn-primary mx-1" role="button">Buy Now</a>
+                    </div>
+                </div>
+              </div>
+        </div>
+    {% endfor %}
+    </div>
+
+   
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

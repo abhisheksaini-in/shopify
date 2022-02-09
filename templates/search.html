@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Serach Results{% endblock title %}
+
+{% block main-content %}
+
+
+
+<div class="container-lg mt-2">
+
+    {% if search|length < 1 %}
+    <div class="container">
+
+        <h1 class="text-2xl fw-600">No Results Found!</h1> <br>
+        <br/>
+        <hr class="bg-warning pt-1">
+    <h1 class="px-12 pt-3 fw-400 text-xl">Your search - <b>{{query}}</b> - did not match any Blog.</h1>
+
+<br/>
+<br/>
+    <h2>Suggestions:-</h2>
+
+    <ul class="px-10" style="list-style-type: circle; ">
+        <li>Make sure that all words are spelled correctly.</li>
+        <li>Try different keywords.</li>
+        <li>Try more general keywords</li>
+    </ul>
+    
+    </div>
+
+    {% endif %}
+
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        {% for sr in search %}
+        <div class="feature col text-center">
+            
+            <div class="card py-3">
+                 <div class=" item">
+                     <div class="thumbnail product-box">
+                     <a href="{% url 'product-detail' sr.url %}">
+                         <img src="/media/{{sr.image}}" alt="" />
+                     </a>
+                         <div class="caption">
+                             <h6 class="mt-2 ml-5"><a  style="text-decoration: none; color:brown;" href="#">{{sr.brand}}</a></h6>
+                             <h5 class="my-2 text-center" ><a class="text-dark" style="text-decoration: none;" href="{% url 'product-detail' sr.url %}">{{sr.title}}</a></h5>
+                             <p class="text-center"> <strong>Rs.{{sr.discount_price}}</strong> &nbsp; <small><s>{{sr.selling_price}}</s></small> &nbsp; <span class="text-success"> {{sr.discount_percent}}% off</span></p>
+                             
+                         </div>
+                     </div>
+                 </div>
+             </div>
+             
+       
+        </div>
+        {% endfor %}
+    </div>   
+   
+           
+      
+
+   
+
+
+</div>
+
+
+
+{% endblock main-content %} 

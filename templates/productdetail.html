@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{product.title}}{% endblock title %}
+{% block main-content %}
+
+<div class="container-fluid my-5 ">
+    
+ <div class="row">
+  <div class="col-sm-2 text-center align-self-center">
+   <img src="/media/{{product.image}}" alt="" class="img-fluid ">
+  </div>
+  <div class="col-sm-5  mt-2">
+   <h2>{{product.title}}</h2>
+   <hr>
+   <h5 >Product Description </h5> 
+   <p class="mt-3">{{product.product_desc | safe }} </p> <br>
+   <h4 > <strong>Rs.{{product.discount_price}}</strong> &nbsp; <small><s>{{product.selling_price}}</s></small> &nbsp; <span class="text-success"> {{product.discount_percent}}% off</span></h4>
+   <br>
+
+    <form action="/add-to-cart" class="d-inline">
+        <input type="hidden" name="product_id" id="product_id" value="{{product.id}}">
+    
+    <button type="submit" class="btn btn-sm btn-primary shadow px-5 py-2">Add to Cart</button>
+    </form>
+
+
+
+   <a href="{% url 'buy-now' %}" class="btn btn-sm btn-danger shadow px-5 py-2 ms-4">Buy Now</a>
+   </div>
+   <div class="col-sm-5  mt-5">
+   <h5 class="mt-5">Available Offers</h5>
+   <p>{{product.offer_detail | safe }}</p>
+  </div>
+ </div>
+
+</div>
+{% endblock main-content %}
